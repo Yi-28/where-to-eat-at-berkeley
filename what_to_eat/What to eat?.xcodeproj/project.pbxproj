@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		30D0BDFD2445AC1000803942 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D0BDFC2445AC1000803942 /* AppDelegate.swift */; };
 		30D0BDFF2445AC1000803942 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D0BDFE2445AC1000803942 /* SceneDelegate.swift */; };
-		30D0BE022445AC1000803942 /* What_to_eat_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30D0BE002445AC1000803942 /* What_to_eat_.xcdatamodeld */; };
 		30D0BE042445AC1000803942 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D0BE032445AC1000803942 /* ContentView.swift */; };
 		30D0BE062445AC1700803942 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE052445AC1700803942 /* Assets.xcassets */; };
 		30D0BE092445AC1700803942 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE082445AC1700803942 /* Preview Assets.xcassets */; };
 		30D0BE0C2445AC1700803942 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE0A2445AC1700803942 /* LaunchScreen.storyboard */; };
+		875088C82814D45500213726 /* What_to_eat_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 875088C62814D45500213726 /* What_to_eat_.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		30D0BDF92445AC1000803942 /* What to eat?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What to eat?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30D0BDFC2445AC1000803942 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30D0BDFE2445AC1000803942 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		30D0BE012445AC1000803942 /* What_to_eat_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = What_to_eat_.xcdatamodel; sourceTree = "<group>"; };
 		30D0BE032445AC1000803942 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		30D0BE052445AC1700803942 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30D0BE082445AC1700803942 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		30D0BE0B2445AC1700803942 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30D0BE0D2445AC1700803942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		875088C72814D45500213726 /* What_to_eat_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = What_to_eat_.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 				30D0BE052445AC1700803942 /* Assets.xcassets */,
 				30D0BE0A2445AC1700803942 /* LaunchScreen.storyboard */,
 				30D0BE0D2445AC1700803942 /* Info.plist */,
-				30D0BE002445AC1000803942 /* What_to_eat_.xcdatamodeld */,
+				875088C62814D45500213726 /* What_to_eat_.xcdatamodeld */,
 				30D0BE072445AC1700803942 /* Preview Content */,
 			);
 			path = "What to eat?";
@@ -150,7 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30D0BDFD2445AC1000803942 /* AppDelegate.swift in Sources */,
-				30D0BE022445AC1000803942 /* What_to_eat_.xcdatamodeld in Sources */,
+				875088C82814D45500213726 /* What_to_eat_.xcdatamodeld in Sources */,
 				30D0BE042445AC1000803942 /* ContentView.swift in Sources */,
 				30D0BDFF2445AC1000803942 /* SceneDelegate.swift in Sources */,
 			);
@@ -350,12 +350,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		30D0BE002445AC1000803942 /* What_to_eat_.xcdatamodeld */ = {
+		875088C62814D45500213726 /* What_to_eat_.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				30D0BE012445AC1000803942 /* What_to_eat_.xcdatamodel */,
+				875088C72814D45500213726 /* What_to_eat_.xcdatamodel */,
 			);
-			currentVersion = 30D0BE012445AC1000803942 /* What_to_eat_.xcdatamodel */;
+			currentVersion = 875088C72814D45500213726 /* What_to_eat_.xcdatamodel */;
 			path = What_to_eat_.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

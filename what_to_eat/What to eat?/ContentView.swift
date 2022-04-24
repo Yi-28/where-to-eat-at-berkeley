@@ -16,11 +16,13 @@ struct ContentView: View {
     @State private var isPresented = false
     @State private var randomSelected: Int = 0
     
+    init() {
+            UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 19)!]
+    }
     
     var body: some View {
         NavigationView {
             VStack {
-                VStack(alignment: .leading) {
                     Button("Choose Random") {
                         if !self.foods.isEmpty {
                             let random = Int.random(in: 0..<self.foods.count)
@@ -29,26 +31,25 @@ struct ContentView: View {
                             self.randomSelected = 0
                         }
                     }
+                    .padding(.vertical)
                     if !self.foods.isEmpty {
                         Text(foods[self.randomSelected].name!)
-                            .font(.largeTitle)
+                            .font(Font.system(size:30, design: .serif))
                             .bold()
                         Text(foods[self.randomSelected].bld!)
-                            .font(.caption)
-                            .bold()
-                        HStack {
+                            .font(Font.system(size:15, design: .monospaced))
+                        VStack {
                             Text(foods[self.randomSelected].timeToPrepare! + " to prepare.")
-                                .font(.caption)
+                                .font(Font.system(size:15, design: .monospaced))
                             Text(foods[self.randomSelected].timeToCook! + " to walk.")
-                                .font(.caption)
+                                .font(Font.system(size:15, design: .monospaced))
                             Text(foods[self.randomSelected].priceRange! + " to buy.")
-                                .font(.caption)
+                                .font(Font.system(size:15, design: .monospaced))
                         }
+                        .padding(.vertical)
 
                     }
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 20)
+                
                 List {
                     ForEach(foods, id: \.id) { food in
                         NavigationLink(destination: FoodView(food: food)) {
@@ -66,7 +67,7 @@ struct ContentView: View {
                     }
                     .onDelete(perform: removeFood)
                 }
-                .navigationBarTitle("Where to Eat @ Berkeley?")
+                .navigationBarTitle(Text("Where to Eat @ Berkeley?"), displayMode: .inline)
                 .navigationBarItems(trailing:
                     HStack {
                         EditButton()
@@ -95,20 +96,27 @@ struct FoodView: View {
     @Environment(\.managedObjectContext) var moc
     var food: Food
     
-    
     var body: some View {
         VStack {
+            
             Text(food.name!)
-                .font(.largeTitle)
+                .font(Font.system(size:30, design: .serif))
                 .bold()
-            Text(food.bld!)
-                .font(.callout)
-            Text("Prepare time: \(food.timeToPrepare ?? " ")")
-                .font(.callout)
-            Text("Walking Time: \(food.timeToCook ?? " ")")
-                .font(.callout)
-            Text("Price Range: \(food.priceRange ?? " ")")
-                .font(.callout)
+                .offset(y: 200)
+                .padding()
+            Text("Location: " + food.bld!)
+                .font(Font.system(size:15, design: .monospaced))
+                .offset(y: 200)
+            Text("Prepare time: " + food.timeToPrepare!)
+                .font(Font.system(size:15, design: .monospaced))
+                .offset(y: 200)
+            Text("Walking Time: " + food.timeToCook!)
+                .font(Font.system(size:15, design: .monospaced))
+                .offset(y: 200)
+            Text("Price Range: " + food.priceRange!)
+                .font(Font.system(size:15, design: .monospaced))
+                .offset(y: 200)
+            Spacer()
         }
     }
 }
