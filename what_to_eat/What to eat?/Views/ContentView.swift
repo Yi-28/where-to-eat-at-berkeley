@@ -15,71 +15,102 @@ struct ContentView: View {
     
     @State private var isPresented = false
     @State private var randomSelected: Int = 0
-    
+    @Environment(\.presentationMode) var presentation
+    @State private var selection = 1
     
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(alignment: .leading) {
-                    Button("Choose Random") {
-                        if !self.foods.isEmpty {
-                            let random = Int.random(in: 0..<self.foods.count)
-                            self.randomSelected = random
-                        } else {
-                            self.randomSelected = 0
-                        }
-                    }
-                    if !self.foods.isEmpty {
-                        Text(foods[self.randomSelected].name!)
-                            .font(.largeTitle)
-                            .bold()
-                        Text(foods[self.randomSelected].bld!)
-                            .font(.caption)
-                            .bold()
-                        HStack {
-                            Text(foods[self.randomSelected].timeToPrepare! + " to prepare.")
-                                .font(.caption)
-                            Text(foods[self.randomSelected].timeToCook! + " to walk.")
-                                .font(.caption)
-                            Text(foods[self.randomSelected].priceRange! + " to buy.")
-                                .font(.caption)
-                        }
-
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 20)
-                List {
-                    ForEach(foods, id: \.id) { food in
-                        NavigationLink(destination: FoodView(food: food)) {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(food.name!)
-                                        .bold()
-                                    Text(food.bld!)
+        TabView(selection: $selection) {
+            NavigationView{
+                ProfileView()
+            }.tabItem() {
+                Text("Profile")
+//              Image(systemName: "pro")
+            }.tag(0)
+            NavigationView {
+                    VStack{
+                        VStack(alignment: .leading) {
+                            Button("Choose Random") {
+                                if !self.foods.isEmpty {
+                                    let random = Int.random(in: 0..<self.foods.count)
+                                    self.randomSelected = random
+                                } else {
+                                    self.randomSelected = 0
+                                }
+                            }
+                            if !self.foods.isEmpty {
+                                Text(foods[self.randomSelected].name!)
+                                    .font(.largeTitle)
+                                    .bold()
+                                Text(foods[self.randomSelected].bld!)
+                                    .font(.caption)
+                                    .bold()
+                                HStack {
+                                    Text(foods[self.randomSelected].timeToPrepare! + " to prepare.")
+                                        .font(.caption)
+                                    Text(foods[self.randomSelected].timeToCook! + " to walk.")
+                                        .font(.caption)
+                                    Text(foods[self.randomSelected].priceRange! + " to buy.")
                                         .font(.caption)
                                 }
-                                Spacer()
 
-                            }.frame(height: 35)
+                            }
                         }
+                        .padding(.horizontal)
+                        .padding(.vertical, 20)
+                        List {
+                            ForEach(foods, id: \.id) { food in
+                                NavigationLink(destination: FoodView(food: food)) {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(food.name!)
+                                                .bold()
+                                            Text(food.bld!)
+                                                .font(.caption)
+                                        }
+                                        Spacer()
+
+                                    }.frame(height: 35)
+                                }
+                            }
+                            .onDelete(perform: removeFood)
+                        }
+                        
+                        .navigationBarTitle("Where to Eat @ Berkeley?")
+                        .navigationBarItems(
+                            trailing:
+                            HStack {
+                            
+                                EditButton()
+
+                                Button("Pick") {
+                                    self.isPresented = true
+                                }
+                                .sheet(isPresented: self.$isPresented) {
+                                    FoodForm(onDismiss: {self.isPresented = false}).environment(\.managedObjectContext, self.moc)
+                                }
+                            }
+                        )
                     }
-                    .onDelete(perform: removeFood)
-                }
-                .navigationBarTitle("Where to Eat @ Berkeley?")
-                .navigationBarItems(trailing:
-                    HStack {
-                        EditButton()
-                        Button("Add") {
-                            self.isPresented = true
-                        }
-                        .sheet(isPresented: self.$isPresented) {
-                            FoodForm(onDismiss: {self.isPresented = false}).environment(\.managedObjectContext, self.moc)
-                        }
-                    }
-                )
-            }
+                }.tabItem() {
+                    Text("W2eat")
+                    //Image(systemName: "face")
+                }.tag(1)
+                NavigationView{
+                    CartView()
+                }.tabItem() {
+                    Text("Order")
+//                    Image("order").frame(width: 5, height: 5)
+                }.tag(2)
         }
+            .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading:
+                                        HStack {
+                    Text("Log Out").onTapGesture {
+                        self.presentation.wrappedValue.dismiss()
+                     }
+                }
+                )
+                .background(Color.white)
     }
     
     func removeFood(at offsets: IndexSet) {
@@ -90,6 +121,13 @@ struct ContentView: View {
         }
     }
 }
+
+struct ProfileView: View {
+    var body: some View {
+        Text("profile")
+    }
+}
+
 
 struct FoodView: View {
     @Environment(\.managedObjectContext) var moc
@@ -140,6 +178,8 @@ struct FoodForm: View {
     private var bldOptions = ["North Gate", "Sather Gate", "Downtown"]
     private var timeOptions = ["Less than 5 mins", "5-10 mins", "10-15 mins", "15-20 mins", "20-25 mins", "25-30 mins", "30-35 mins", "35-40 mins", "40-45 mins", "45-50 mins", "50-55 mins", "55-60 mins", "1-1.5 hours", "1.5-2hours", "More than 2 hours"]
     private var priceOptions = ["Less than $5", "$5 - $10", "$10 - $20", "$20 - $30", "Above $30"]
+    
+    
     var body: some View {
         return NavigationView {
             GeometryReader { geometry in
@@ -187,6 +227,9 @@ struct FoodForm: View {
                     }
 
                     Section {
+                        HStack {
+                            
+     
                         Button("Save") {
                             let newItem = Food(context: self.moc)
                             newItem.id = UUID()
@@ -292,9 +335,15 @@ struct FoodForm: View {
                             try? self.moc.save()
                             self.onDismiss()
                         }
+                            Spacer()
+                            Button("Cancel") {
+                                self.onDismiss()
+                            }
+                            
+                        }
                     }
                 }
-            }.navigationBarTitle("Add new food")
+            }.navigationBarTitle("Pick Settings")
         }
     }
 }
@@ -304,5 +353,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
 

@@ -14,6 +14,8 @@
 		30D0BE062445AC1700803942 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE052445AC1700803942 /* Assets.xcassets */; };
 		30D0BE092445AC1700803942 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE082445AC1700803942 /* Preview Assets.xcassets */; };
 		30D0BE0C2445AC1700803942 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D0BE0A2445AC1700803942 /* LaunchScreen.storyboard */; };
+		F194FC412814F88B00D1DC0E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F194FC402814F88B00D1DC0E /* LoginView.swift */; };
+		F194FC532815F11600D1DC0E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F194FC522815F11600D1DC0E /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		30D0BE082445AC1700803942 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		30D0BE0B2445AC1700803942 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30D0BE0D2445AC1700803942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F194FC402814F88B00D1DC0E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F194FC522815F11600D1DC0E /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +62,9 @@
 		30D0BDFB2445AC1000803942 /* What to eat? */ = {
 			isa = PBXGroup;
 			children = (
+				F194FC3F2814F87500D1DC0E /* Views */,
 				30D0BDFC2445AC1000803942 /* AppDelegate.swift */,
 				30D0BDFE2445AC1000803942 /* SceneDelegate.swift */,
-				30D0BE032445AC1000803942 /* ContentView.swift */,
 				30D0BE052445AC1700803942 /* Assets.xcassets */,
 				30D0BE0A2445AC1700803942 /* LaunchScreen.storyboard */,
 				30D0BE0D2445AC1700803942 /* Info.plist */,
@@ -76,6 +80,16 @@
 				30D0BE082445AC1700803942 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F194FC3F2814F87500D1DC0E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				30D0BE032445AC1000803942 /* ContentView.swift */,
+				F194FC402814F88B00D1DC0E /* LoginView.swift */,
+				F194FC522815F11600D1DC0E /* CartView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,9 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F194FC532815F11600D1DC0E /* CartView.swift in Sources */,
 				30D0BDFD2445AC1000803942 /* AppDelegate.swift in Sources */,
 				30D0BE022445AC1000803942 /* What_to_eat_.xcdatamodeld in Sources */,
 				30D0BE042445AC1000803942 /* ContentView.swift in Sources */,
+				F194FC412814F88B00D1DC0E /* LoginView.swift in Sources */,
 				30D0BDFF2445AC1000803942 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -274,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
