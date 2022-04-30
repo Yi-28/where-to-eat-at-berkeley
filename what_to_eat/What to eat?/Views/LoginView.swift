@@ -32,14 +32,24 @@ struct LoginView: View {
                         Spacer()
 
                     }
+                    Spacer()
                     VStack {
                         TextField("Username", text: $user).padding()
                             .keyboardType(.emailAddress).frame(width: 300, height: 90)
                         SecureField("Passcode", text: $password).padding().frame(width: 300, height: 90)
                     }
-                    .frame(width: 340)
-                    .background(Color.green.brightness(0.6))
+                    .frame(width: 320)
+                    .background(Color.init(Color.RGBColorSpace.sRGB, red: 0.7, green: 0.85, blue: 0.82))
                     .cornerRadius(18)
+                    Spacer()
+                    Button("Go") {
+                        showLogin = true
+                    }.frame(width: 100, height: 40)
+                        .foregroundColor(Color.black)
+                        .font(.system(size: 35))
+                        .background(Color.white)
+                        .overlay(RoundedRectangle(cornerRadius: 25)
+                                    .stroke(Color.black, lineWidth: 2))
                     Spacer()
                     Button("Continue as guest") {
                         showLogin = true
@@ -48,7 +58,7 @@ struct LoginView: View {
                         .font(.system(size: 25))
                         .background(Color.yellow.brightness(0.8))
                         .cornerRadius(20)
-                        
+                    
 
                     Spacer()
                     NavigationLink(destination: ContentView(), isActive: $showLogin) {

@@ -19,98 +19,109 @@ struct ContentView: View {
     @State private var selection = 1
     
     var body: some View {
-        TabView(selection: $selection) {
-            NavigationView{
-                ProfileView()
-            }.tabItem() {
-                Text("Profile")
-//              Image(systemName: "pro")
-            }.tag(0)
-            NavigationView {
-                    VStack{
-                        VStack(alignment: .leading) {
-                            Button("Choose Random") {
-                                if !self.foods.isEmpty {
-                                    let random = Int.random(in: 0..<self.foods.count)
-                                    self.randomSelected = random
-                                } else {
-                                    self.randomSelected = 0
-                                }
-                            }
-                            if !self.foods.isEmpty {
-                                Text(foods[self.randomSelected].name!)
-                                    .font(.largeTitle)
-                                    .bold()
-                                Text(foods[self.randomSelected].bld!)
-                                    .font(.caption)
-                                    .bold()
-                                HStack {
-                                    Text(foods[self.randomSelected].timeToPrepare! + " to prepare.")
-                                        .font(.caption)
-                                    Text(foods[self.randomSelected].timeToCook! + " to walk.")
-                                        .font(.caption)
-                                    Text(foods[self.randomSelected].priceRange! + " to buy.")
-                                        .font(.caption)
-                                }
-
-                            }
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 20)
-                        List {
-                            ForEach(foods, id: \.id) { food in
-                                NavigationLink(destination: FoodView(food: food)) {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text(food.name!)
-                                                .bold()
-                                            Text(food.bld!)
-                                                .font(.caption)
-                                        }
-                                        Spacer()
-
-                                    }.frame(height: 35)
-                                }
-                            }
-                            .onDelete(perform: removeFood)
-                        }
-                        
-                        .navigationBarTitle("Where to Eat @ Berkeley?")
-                        .navigationBarItems(
-                            trailing:
-                            HStack {
-                            
-                                EditButton()
-
-                                Button("Pick") {
-                                    self.isPresented = true
-                                }
-                                .sheet(isPresented: self.$isPresented) {
-                                    FoodForm(onDismiss: {self.isPresented = false}).environment(\.managedObjectContext, self.moc)
-                                }
-                            }
-                        )
-                    }
-                }.tabItem() {
-                    Text("W2eat")
-                    //Image(systemName: "face")
-                }.tag(1)
+        ZStack(alignment: .center){
+            TabView(selection: $selection) {
                 NavigationView{
-                    CartView()
+                    ProfileView()
                 }.tabItem() {
-                    Text("Order")
-//                    Image("order").frame(width: 5, height: 5)
-                }.tag(2)
-        }
-            .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading:
+                    Text("PROFILE")
+                    Image("pro")
+                }.tag(0)
+                NavigationView {
+                        VStack{
+                            VStack {
+                                Button("   ") {
+                                    if !self.foods.isEmpty {
+                                        let random = Int.random(in: 0..<self.foods.count)
+                                        self.randomSelected = random
+                                    } else {
+                                        self.randomSelected = 0
+                                    }
+                                }.font(.system(size: 50))
+                                .background(Image("ran"))
+                                                                
+                                if !self.foods.isEmpty {
+                                    Text(foods[self.randomSelected].name!)
+                                        .font(.system(size: 30))
+                                        .bold().padding(7)
+                                    Text(foods[self.randomSelected].bld!)
+                                        .font(.caption)
+                                        .bold()
+                                        .padding(5)
+                                    HStack {
+                                        Text(foods[self.randomSelected].timeToPrepare! + " to prepare.")
+                                            .font(.caption)
+                                        Text(foods[self.randomSelected].timeToCook! + " to walk.")
+                                            .font(.caption)
+                                        Text(foods[self.randomSelected].priceRange! + " to buy.")
+                                            .font(.caption)
+                                    }
+
+                                }
+                            }
+                            .padding(.horizontal)
+                            List {
+                                ForEach(foods, id: \.id) { food in
+                                    NavigationLink(destination: FoodView(food: food)) {
                                         HStack {
-                    Text("Log Out").onTapGesture {
-                        self.presentation.wrappedValue.dismiss()
-                     }
-                }
-                )
-                .background(Color.white)
+                                            VStack(alignment: .leading) {
+                                                Text(food.name!)
+                                                    .bold()
+                                                Text(food.bld!)
+                                                    .font(.caption)
+                                            }
+                                            Spacer()
+
+                                        }.frame(height: 35)
+                                    }
+                                }
+                                .onDelete(perform: removeFood)
+                            }
+                            
+//                            .navigationBarTitle("Where to Eat @ Berkeley?")
+                            .navigationBarItems(
+                                leading:
+                                HStack {
+                                    EditButton().padding(90)
+                                    Button("Pick") {
+                                        self.isPresented = true
+                                    }
+                                    .sheet(isPresented: self.$isPresented) {
+                                        FoodForm(onDismiss: {self.isPresented = false}).environment(\.managedObjectContext, self.moc)
+                                    }
+                                }
+                            )
+                        }
+                    }.tabItem() {
+//                        Text("W2eat")
+                        Image("home")
+                    }.tag(1)
+                    
+                    NavigationView{
+                        CartView(randomPlace: foods[self.randomSelected].name! , address: foods[self.randomSelected].bld ?? "Address").frame(width: 350, height:600)
+                            .edgesIgnoringSafeArea([.top, .bottom])
+                    }.tabItem() {
+                        ZStack{
+                            Image("order").padding()
+                            Text("ORDER")
+                        }
+                    }.tag(2)
+            }
+            .navigationBarTitle("Where 2 Eat @ Berk", displayMode: .automatic)
+                .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading:
+                                            HStack {
+                        Text("Log Out").onTapGesture {
+                            self.presentation.wrappedValue.dismiss()
+
+                         }
+                    }
+                    )
+                    .background(Color.white)
+                    .frame(width: 400, height: 700, alignment: .center)
+            }       
+
+        
     }
     
     func removeFood(at offsets: IndexSet) {
